@@ -7,7 +7,7 @@ include_once __DIR__.'/admin.php'; // Incluir las rutas de admin
 include_once __DIR__.'/cda.php'; // Incluir las rutas de admin
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('home');
 });
 
 // Auth::routes();
