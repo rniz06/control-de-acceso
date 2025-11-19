@@ -111,7 +111,7 @@ return [
     */
 
     'preloader' => [
-        'enabled' => true,
+        'enabled' => false,
         'mode' => 'fullscreen',
         'img' => [
             'path' => 'img/logos/rubilock.webp',
@@ -157,7 +157,7 @@ return [
     'layout_boxed' => null,
     'layout_fixed_sidebar' => null,
     'layout_fixed_navbar' => null,
-    'layout_fixed_footer' => null,
+    'layout_fixed_footer' => true,
     'layout_dark_mode' => null,
 
     /*
@@ -437,6 +437,11 @@ return [
             'text' => 'SOPORTE',
             'icon_color' => 'yellow',
             'url' => '#',
+        ],
+        [
+            'text' => 'Cambiar Contraseña',
+            'icon_color' => 'danger',
+            'route' => 'admin.usuarios.cambiar-contrasenha',
         ]
     ],
 

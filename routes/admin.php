@@ -11,6 +11,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::get('/usuarios', 'index')->name('usuarios.index');
         Route::get('/usuarios/create', 'create')->name('usuarios.create');
         Route::get('/usuarios/asignar-rol-a-usuarios', 'asignarRolAUsuario')->name('usuarios.asignar-rol-a-usuarios');
+        Route::get('/usuarios/cambiar-contrasena', 'cambiarContrasenha')->name('usuarios.cambiar-contrasenha');
         Route::get('/usuarios/{usuario}/edit', 'edit')->name('usuarios.edit');
         Route::get('/usuarios/{usuario}/asignar-rol', 'asignarRol')->name('usuarios.asignar-rol'); // AGREGAR MIDDLEWARE PARA EVITAR QUE MANIPULEN LA URL Y ACCEDAN AL USUARIO ADMINISTRADOR
     });

@@ -44,4 +44,9 @@ class UsuarioController extends Controller
     {
         return view('admin.usuarios.asignar-rol', compact('usuario'));
     }
+
+    public function cambiarContrasenha()
+    {
+        return view('admin.usuarios.cambiar-contrasenha');
+    }
 }
