@@ -51,7 +51,7 @@
 
         </x-slot>
 
-        @forelse ($empresas as $empresa)
+        @forelse ($empresas as $index => $empresa)
             <tr>
                 <td>{{ $empresa->empresa ?? 'S/D' }}</td>
                 <td>{{ $empresa->razon_social ?? 'S/D' }}</td>
@@ -61,16 +61,23 @@
                 <td>{{ $empresa->direccion ?? 'S/D' }}</td>
                 <td>
                     <x-tabla-dropdown>
+                        {{-- Boton Modal Ver Sucursales --}}
+                        <x-adminlte-button label="Ver Sucursales" class="dropdown-item btn-sm" icon="fas fa-eye"
+                            data-toggle="modal" data-target="#modal-ver-sucursales-{{ $empresa->id }}" />
+
                         @can('Empresas Editar')
                             <a href="{{ route('admin.empresas.edit', $empresa->id) }}"
                                 class="dropdown-item btn-sm btn-default"><i class="fas fa-edit mr-1"></i>Editar</a>
                         @endcan
                         @can('Empresas Eliminar')
                             <x-adminlte-button label="Eliminar" icon="fas fa-trash" class="dropdown-item btn-sm"
-                                    wire:click="eliminar({{ $empresa->id }})"
-                                    wire:confirm="Estas Seguro que desear ELIMINAR esta empresa?" />
+                                wire:click="eliminar({{ $empresa->id }})"
+                                wire:confirm="Estas Seguro que desear ELIMINAR esta empresa?" />
                         @endcan
                     </x-tabla-dropdown>
+
+                    {{-- Componente con Modal Fuera del Dropdonw para evitar superposicion --}}
+                    @livewire('empresas.sucursales.modal-ver-sucursales', ['empresa_id' => $empresa->id], key($empresa->id))
                 </td>
             </tr>
         @empty
