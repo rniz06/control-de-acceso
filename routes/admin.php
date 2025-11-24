@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\EmpresaController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UsuarioController;
 use Illuminate\Support\Facades\Route;
@@ -21,5 +22,12 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::get('/roles', 'index')->name('roles.index');
         Route::get('/roles/create', 'create')->name('roles.create');
         Route::get('/roles/{role}/edit', 'edit')->name('roles.edit');
+    });
+
+    // RUTAS DEL MODULO EMPRESAS
+    Route::controller(EmpresaController::class)->group(function () {
+        Route::get('/empresas', 'index')->name('empresas.index');
+        Route::get('/empresas/create', 'create')->name('empresas.create');
+        Route::get('/empresas/{empresa}/edit', 'edit')->name('empresas.edit');
     });
 });

@@ -331,6 +331,11 @@ return [
                     'route' => 'admin.roles.index',
                     'can' => 'Roles Listar',
                 ],
+                [
+                    'text' => 'Empresas',
+                    'route' => 'admin.empresas.index',
+                    'can' => 'Empresas Listar',
+                ],
             ],
         ],
         [
