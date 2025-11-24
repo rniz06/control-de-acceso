@@ -77,7 +77,7 @@
                     </x-tabla-dropdown>
 
                     {{-- Componente con Modal Fuera del Dropdonw para evitar superposicion --}}
-                    @livewire('empresas.sucursales.modal-ver-sucursales', ['empresa_id' => $empresa->id], key($empresa->id))
+                    @livewire('admin.empresas.sucursales.modal-ver-sucursales', ['empresa_id' => $empresa->id], key($empresa->id))
                 </td>
             </tr>
         @empty

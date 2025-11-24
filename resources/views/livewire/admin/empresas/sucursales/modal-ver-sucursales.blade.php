@@ -49,7 +49,7 @@
         {{-- Este slot debe ir FUERA del form --}}
         <x-slot name="footerSlot">
             <x-adminlte-button theme="outline-secondary" class="btn-sm" icon="fas fa-arrow-left" label="Cerrar"
-                data-dismiss="modal" />
+                data-dismiss="modal" wire:click="cerrar_modal" />
         </x-slot>
 
     </x-adminlte-modal>
