@@ -348,9 +348,21 @@ return [
                     //'can' => 'Panel Central',
                 ],
                 [
-                    'text' => 'Reporte de Ingresos',
+                    'text'  => 'Reporte de Ingresos',
                     'route' => 'cda.reportes.ingreso',
                     //'can' => 'Reportes Ingresos',
+                ],
+                [
+                    'text' => 'Parametros',
+                    #'icon' => 'fas fa-truck',
+                    'submenu' => [
+                        [
+                            'text'  => 'Vehiculos',
+                            'route' => 'cda.parametros.vehiculos.index',
+                            'icon'  => 'fas fa-truck',
+                            'can'   => 'Vehiculos Listar',
+                        ],
+                    ],
                 ],
             ],
         ],

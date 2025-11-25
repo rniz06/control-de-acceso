@@ -3,6 +3,8 @@
 namespace App\Models\Cda;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -46,6 +48,56 @@ class Vehiculo extends Model implements Auditable
     | FIN RELACIONES DEL MODELO
     |---------------------------------------
     */
+
+    /*
+    |---------------------------------------
+    | SCOPES LOCALES PARA FILTROS
+    |---------------------------------------
+    */
+
+    /**
+     * Busqueda por campo chapa.
+     */
+    #[Scope]
+    protected function buscarChapa(Builder $query, $search = null): void
+    {
+        $query->when($search, function (Builder $query, string $search) {
+            $query->whereLike('chapa', "%{$search}%");
+        });
+    }
+
+    /**
+     * Busqueda por relacion marca campo marca.
+     */
+    #[Scope]
+    protected function buscarMarcaId(Builder $query, $search = null): void
+    {
+        $query->when($search, function (Builder $query, string $search) {
+            $query->where('marca_id', $search);
+        });
+    }
+
+    /**
+     * Busqueda por relacion modelo campo modelo.
+     */
+    #[Scope]
+    protected function buscarModeloId(Builder $query, $search = null): void
+    {
+        $query->when($search, function (Builder $query, string $search) {
+            $query->where('modelo_id', $search);
+        });
+    }
+
+    /**
+     * Busqueda por relacion modelo campo modelo.
+     */
+    #[Scope]
+    protected function buscarColorId(Builder $query, $search = null): void
+    {
+        $query->when($search, function (Builder $query, string $search) {
+            $query->where('color_id', $search);
+        });
+    }
 
     /*
     |---------------------------------------
