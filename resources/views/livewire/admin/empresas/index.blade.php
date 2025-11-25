@@ -71,6 +71,10 @@
                                 data-toggle="modal" data-target="#modal-create-sucursal-{{ $empresa->id }}" />
                         @endcan
 
+                        {{-- Boton Modal Ver Accesos --}}
+                        <x-adminlte-button label="Ver Accesos" class="dropdown-item btn-sm" icon="fas fa-eye"
+                            data-toggle="modal" data-target="#modal-ver-accesos-{{ $empresa->id }}" />
+
                         @can('Empresas Editar')
                             <a href="{{ route('admin.empresas.edit', $empresa->id) }}"
                                 class="dropdown-item btn-sm btn-default"><i class="fas fa-edit mr-1"></i>Editar</a>
@@ -86,6 +90,8 @@
                     @livewire('admin.empresas.sucursales.modal-ver-sucursales', ['empresa_id' => $empresa->id], key($empresa->id))
 
                     @livewire('admin.empresas.sucursales.modal-create', ['empresa_id' => $empresa->id], key($empresa->id))
+
+                    @livewire('admin.empresas.accesos.modal-ver-accesos', ['empresa_id' => $empresa->id], key($empresa->id))
                 </td>
             </tr>
         @empty
