@@ -65,6 +65,12 @@
                         <x-adminlte-button label="Ver Sucursales" class="dropdown-item btn-sm" icon="fas fa-eye"
                             data-toggle="modal" data-target="#modal-ver-sucursales-{{ $empresa->id }}" />
 
+                        @can('Empresas Agregar Sucursal')
+                            {{-- Boton Abrir Modal --}}
+                            <x-adminlte-button label="Agregar Sucursal" class="dropdown-item btn-sm" icon="fas fa-plus"
+                                data-toggle="modal" data-target="#modal-create-sucursal-{{ $empresa->id }}" />
+                        @endcan
+
                         @can('Empresas Editar')
                             <a href="{{ route('admin.empresas.edit', $empresa->id) }}"
                                 class="dropdown-item btn-sm btn-default"><i class="fas fa-edit mr-1"></i>Editar</a>
@@ -78,6 +84,8 @@
 
                     {{-- Componente con Modal Fuera del Dropdonw para evitar superposicion --}}
                     @livewire('admin.empresas.sucursales.modal-ver-sucursales', ['empresa_id' => $empresa->id], key($empresa->id))
+
+                    @livewire('admin.empresas.sucursales.modal-create', ['empresa_id' => $empresa->id], key($empresa->id))
                 </td>
             </tr>
         @empty
