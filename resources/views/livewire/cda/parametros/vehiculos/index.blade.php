@@ -3,8 +3,9 @@
 
         <x-slot name="headerBotones">
             @can('Vehiculos Crear')
-                <a href="{{ route('admin.empresas.create') }}" class="btn btn-sm btn-success"><i
-                        class="fas fa-user-plus"></i>Añadir Vehiculo</a>
+                <x-adminlte-button label="Añadir Vehiculo" class="btn-sm" theme="outline-success" icon="fas fa-plus"
+                    data-toggle="modal" data-target="#modal-create-vehiculo" />
+                @livewire('cda.parametros.vehiculos.modal-create')
             @endcan
         </x-slot>
 
