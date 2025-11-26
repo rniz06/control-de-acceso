@@ -2,6 +2,7 @@
     <x-tabla titulo="Listado De Vehiculos Registrados">
 
         <x-slot name="headerBotones">
+            {{-- Boton y Modal Crear --}}
             @can('Vehiculos Crear')
                 <x-adminlte-button label="Añadir Vehiculo" class="btn-sm" theme="outline-success" icon="fas fa-plus"
                     data-toggle="modal" data-target="#modal-create-vehiculo" />
@@ -66,8 +67,8 @@
                     <x-tabla-dropdown>
                         @can('Vehiculos Editar')
                             {{-- Boton Abrir Modal Edicion --}}
-                            {{-- <x-adminlte-button label="Editar" class="dropdown-item btn-sm" icon="fas fa-edit"
-                                data-toggle="modal" data-target="#modal-edit-vehiculo-{{ $vehiculo->id }}" /> --}}
+                            <x-adminlte-button label="Editar" class="dropdown-item btn-sm" icon="fas fa-edit"
+                                data-toggle="modal" data-target="#modal-edit-vehiculo-{{ $vehiculo->id }}" />
                         @endcan
                         @can('Vehiculos Eliminar')
                             <x-adminlte-button label="Eliminar" icon="fas fa-trash" class="dropdown-item btn-sm"
@@ -77,8 +78,7 @@
                     </x-tabla-dropdown>
 
                     {{-- Componente con Modal Fuera del Dropdonw para evitar superposicion --}}
-                    {{-- @livewire('admin.empresas.sucursales.modal-ver-sucursales', ['empresa_id' => $empresa->id], key($empresa->id)) --}}
-
+                    @livewire('cda.parametros.vehiculos.modal-edit', ['vehiculo_id' => $vehiculo->id], key($vehiculo->id))
                 </td>
             </tr>
         @empty
