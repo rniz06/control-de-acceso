@@ -3,6 +3,8 @@
 namespace App\Models\Cda;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -34,6 +36,29 @@ class Marca extends Model implements Auditable
     /*
     |---------------------------------------
     | FIN RELACIONES DEL MODELO
+    |---------------------------------------
+    */
+
+    /*
+    |---------------------------------------
+    | SCOPES LOCALES PARA FILTROS
+    |---------------------------------------
+    */
+
+    /**
+     * Busqueda por campo marca.
+     */
+    #[Scope]
+    protected function buscarMarca(Builder $query, $search = null): void
+    {
+        $query->when($search, function (Builder $query, string $search) {
+            $query->whereLike('marca', "%{$search}%");
+        });
+    }
+
+    /*
+    |---------------------------------------
+    | FIN SCOPES LOCALES PARA FILTROS
     |---------------------------------------
     */
 

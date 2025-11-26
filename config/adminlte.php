@@ -362,6 +362,12 @@ return [
                             'icon'  => 'fas fa-truck',
                             'can'   => 'Vehiculos Listar',
                         ],
+                        [
+                            'text'  => 'Marcas',
+                            'route' => 'cda.parametros.marcas.index',
+                            #'icon'  => 'fas fa-truck',
+                            'can'   => 'Marcas Listar',
+                        ],
                     ],
                 ],
             ],

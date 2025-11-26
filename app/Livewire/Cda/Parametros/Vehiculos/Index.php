@@ -63,14 +63,17 @@ class Index extends Component
     }
 
     # Eliminar Vehiculo
-    public function eliminar($id)
+    public function eliminar($id = null)
     {
-        if (!$id) {
-            return;
+        try {
+            Vehiculo::findOrFail($id)->delete();
+
+            session()->flash('success', 'Vehiculo Eliminado Correctamente!');
+        } catch (\Exception $e) {
+            session()->flash('error', 'No se pudo eliminar el Vehiculo. ' . $e->getMessage());
         }
-        Vehiculo::findOrFail($id)->delete();
-        session()->flash('success', 'Vehiculo Eliminado Correctamente!');
-        $this->redirectRoute('cda.parametros.vehiculos.index');
+
+        return $this->redirectRoute('cda.parametros.marcas.index');
     }
 
     # Actualizar Modelos Del select de filtros al cambiar de Marca

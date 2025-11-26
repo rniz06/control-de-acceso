@@ -2,8 +2,8 @@
 
 {{-- Customize layout sections --}}
 
-@section('subtitle', 'Vehiculos')
-@section('content_header_title', 'Vehiculos')
+@section('subtitle', 'Marcas')
+@section('content_header_title', 'Marcas')
 @section('content_header_subtitle', 'Listar')
 
 {{-- Content body: main page content --}}
@@ -15,7 +15,7 @@
     @endif
 
     {{-- RENDERIZAR COMPONENTE LIVEWIRE --}}
-    @livewire('cda.parametros.vehiculos.index')
+    @livewire('cda.parametros.marcas.index')
 
 @stop
 

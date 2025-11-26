@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Cda\ControlDeAccesoController;
 use App\Http\Controllers\Cda\PanelCentralController;
+use App\Http\Controllers\Cda\Parametros\MarcaController;
 use App\Http\Controllers\Cda\Parametros\VehiculoController;
 use App\Http\Controllers\Cda\ReporteController;
 use App\Http\Controllers\Compras\Pedidos\PedidoController;
@@ -41,6 +42,11 @@ Route::prefix('control-de-acceso')->name('cda.')->middleware('auth')->group(func
 
         # RUTAS DEL MODULO PARAMETROS / VEHICULOS
         Route::controller(VehiculoController::class)->prefix('vehiculos')->name('vehiculos.')->group(function () {
+            Route::get('/', 'index')->name('index');
+        });
+
+        # RUTAS DEL MODULO PARAMETROS / MARCAS
+        Route::controller(MarcaController::class)->prefix('marcas')->name('marcas.')->group(function () {
             Route::get('/', 'index')->name('index');
         });
     });
