@@ -62,6 +62,18 @@ class Index extends Component
         ]);
     }
 
+    # Eliminar Vehiculo
+    public function eliminar($id)
+    {
+        if (!$id) {
+            return;
+        }
+        Vehiculo::findOrFail($id)->delete();
+        session()->flash('success', 'Vehiculo Eliminado Correctamente!');
+        $this->redirectRoute('cda.parametros.vehiculos.index');
+    }
+
+    # Actualizar Modelos Del select de filtros al cambiar de Marca
     public function updatedBuscarMarcaId($marca_id)
     {
         $this->modelos = Modelo::where('marca_id', $marca_id)->get(['id', 'modelo']);
