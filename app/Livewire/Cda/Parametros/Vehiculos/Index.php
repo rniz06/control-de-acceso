@@ -34,7 +34,6 @@ class Index extends Component
         $this->colores = Color::get(['id', 'color']);
     }
 
-
     # LIMPIAR EL BUSCADOR Y LA PAGINACION AL CAMBIAR DE PAGINA
     public function updating($key): void
     {
