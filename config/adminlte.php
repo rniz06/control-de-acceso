@@ -368,6 +368,12 @@ return [
                             #'icon'  => 'fas fa-truck',
                             'can'   => 'Marcas Listar',
                         ],
+                        [
+                            'text'  => 'Colores',
+                            'route' => 'cda.parametros.colores.index',
+                            #'icon'  => 'fas fa-truck',
+                            'can'   => 'Colores Listar',
+                        ],
                     ],
                 ],
             ],

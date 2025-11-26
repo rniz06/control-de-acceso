@@ -1,20 +1,20 @@
 <div>
-    <x-tabla titulo="Listado De Marcas">
+    <x-tabla titulo="Listado De Colores">
 
         <x-slot name="headerBotones">
             {{-- Boton y Modal Crear --}}
-            @can('Marcas Crear')
-                <x-adminlte-button label="Añadir Marca" class="btn-sm" theme="outline-success" icon="fas fa-plus"
-                    data-toggle="modal" data-target="#modal-create-marca" />
-                @livewire('cda.parametros.marcas.modal-create')
+            @can('Colores Crear')
+                <x-adminlte-button label="Añadir Color" class="btn-sm" theme="outline-success" icon="fas fa-plus"
+                    data-toggle="modal" data-target="#modal-create-color" />
+                @livewire('cda.parametros.colores.modal-create')
             @endcan
         </x-slot>
 
         <x-slot name="cabeceras">
-            {{-- Marca --}}
+            {{-- Color --}}
             <th>
-                <x-adminlte-input name="" wire:model.live.debounce.200ms="buscarMarca"
-                    oninput="this.value = this.value.toUpperCase()" label="Marca" igroup-size="sm" />
+                <x-adminlte-input name="" wire:model.live.debounce.200ms="buscarColor"
+                    oninput="this.value = this.value.toUpperCase()" label="Color" igroup-size="sm" />
             </th>
 
             {{-- Acciones --}}
@@ -24,25 +24,25 @@
 
         </x-slot>
 
-        @forelse ($marcas as $marca)
+        @forelse ($colores as $color)
             <tr>
-                <td>{{ $marca->marca ?? 'S/D' }}</td>
+                <td>{{ $color->color ?? 'S/D' }}</td>
                 <td>
                     <x-tabla-dropdown>
-                        @can('Marcas Editar')
+                        @can('Colores Editar')
                             {{-- Boton Abrir Modal Edicion --}}
                             <x-adminlte-button label="Editar" class="dropdown-item btn-sm" icon="fas fa-edit"
-                                data-toggle="modal" data-target="#modal-edit-marca-{{ $marca->id }}" />
+                                data-toggle="modal" data-target="#modal-edit-color-{{ $color->id }}" />
                         @endcan
-                        @can('Marcas Eliminar')
+                        @can('Colores Eliminar')
                             <x-adminlte-button label="Eliminar" icon="fas fa-trash" class="dropdown-item btn-sm"
-                                wire:click="eliminar({{ $marca->id }})"
-                                wire:confirm="Estas Seguro que desear ELIMINAR esta marca?" />
+                                wire:click="eliminar({{ $color->id }})"
+                                wire:confirm="Estas Seguro que desear ELIMINAR este Color?" />
                         @endcan
                     </x-tabla-dropdown>
 
                     {{-- Componente con Modal Fuera del Dropdonw para evitar superposicion --}}
-                    @livewire('cda.parametros.marcas.modal-edit', ['marca_id' => $marca->id], key($marca->id))
+                    @livewire('cda.parametros.colores.modal-edit', ['color_id' => $color->id], key($color->id))
                 </td>
             </tr>
         @empty
@@ -52,7 +52,7 @@
         @endforelse
 
         <x-slot name="paginacion">
-            {{ $marcas->links() }}
+            {{ $colores->links() }}
         </x-slot>
     </x-tabla>
 </div>

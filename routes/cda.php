@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Cda\ControlDeAccesoController;
 use App\Http\Controllers\Cda\PanelCentralController;
+use App\Http\Controllers\Cda\Parametros\ColorController;
 use App\Http\Controllers\Cda\Parametros\MarcaController;
 use App\Http\Controllers\Cda\Parametros\VehiculoController;
 use App\Http\Controllers\Cda\ReporteController;
@@ -47,6 +48,11 @@ Route::prefix('control-de-acceso')->name('cda.')->middleware('auth')->group(func
 
         # RUTAS DEL MODULO PARAMETROS / MARCAS
         Route::controller(MarcaController::class)->prefix('marcas')->name('marcas.')->group(function () {
+            Route::get('/', 'index')->name('index');
+        });
+
+        # RUTAS DEL MODULO PARAMETROS / COLORES
+        Route::controller(ColorController::class)->prefix('colores')->name('colores.')->group(function () {
             Route::get('/', 'index')->name('index');
         });
     });
