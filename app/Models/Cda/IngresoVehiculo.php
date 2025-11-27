@@ -121,6 +121,17 @@ class IngresoVehiculo extends Model implements Auditable
     }
 
     /**
+     * Busqueda por campo fecha_hora_salida.
+     */
+    #[Scope]
+    protected function buscarFechaHoraSalida(Builder $query, $search = null): void
+    {
+        $query->when($search, function (Builder $query, string $search) {
+            $query->whereDate('fecha_hora_salida', '>=', $search);
+        });
+    }
+
+    /**
      * Busqueda por relacion vehiculo campo chapa.
      */
     #[Scope]

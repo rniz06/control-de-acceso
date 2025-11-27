@@ -353,6 +353,11 @@ return [
                     'can' => 'Reportes Ingresos Listar',
                 ],
                 [
+                    'text'  => 'Reporte de Salidas',
+                    'route' => 'cda.reportes.salidas',
+                    'can' => 'Reportes Salidas Listar',
+                ],
+                [
                     'text' => 'Parametros',
                     #'icon' => 'fas fa-truck',
                     'submenu' => [

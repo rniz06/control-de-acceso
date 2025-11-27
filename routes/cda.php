@@ -38,6 +38,7 @@ Route::prefix('control-de-acceso')->name('cda.')->middleware('auth')->group(func
     // RUTAS DEL MODULO CONTROL DE ACCESO / REPORTES / INGRESO
     Route::controller(ReporteController::class)->prefix('reportes')->name('reportes.')->group(function () {
         Route::get('/', 'ingreso')->name('ingreso');
+        Route::get('/salidas', 'salidas')->name('salidas');
     });
 
     # RUTAS DE AGRUPADAS DE PARAMETROS

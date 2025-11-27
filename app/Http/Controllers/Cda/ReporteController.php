@@ -7,8 +7,23 @@ use Illuminate\Http\Request;
 
 class ReporteController extends Controller
 {
+    /**
+     * Establece los middleware necesarios para gestionar permisos
+     * Se utilizan permisos específicos para cada acción del controlador.
+     */
+    function __construct()
+    {
+        $this->middleware('permission:Reportes Ingresos Listar', ['only' => ['ingreso']]);
+        $this->middleware('permission:Reportes Salidas Listar', ['only' => ['salidas']]);
+    }
+
     public function ingreso()
     {
         return view('cda.reportes.ingresos');    
+    }
+
+    public function salidas()
+    {
+        return view('cda.reportes.salidas');    
     }
 }
