@@ -17,8 +17,10 @@
             <tr>
                 <th>Fecha Ingreso</th>
                 <th>Vehiculo</th>
+                <th>Registro Entrada</th>
+                <th>Empresa</th>
+                <th>Sucursal</th>
                 <th>Acceso</th>
-                <th>Guardia</th>
             </tr>
         </thead>
 
@@ -27,8 +29,10 @@
                 <tr>
                     <td>{{ optional($ingreso->fecha_hora_ingreso)->format('d/m/Y H:i:s') ?? 'S/D' }}</td>
                     <td>{{ $ingreso->vehiculo->chapa ?? 'S/D' }}</td>
-                    <td>{{ $ingreso->accesoIngreso->acceso ?? 'S/D' }}</td>
                     <td>{{ $ingreso->usuarioRegistroIngreso->name ?? 'S/D' }}</td>
+                    <td>{{ $ingreso->empresa->empresa ?? 'S/D' }}</td>
+                    <td>{{ $ingreso->sucursal->sucursal ?? 'S/D' }}</td>
+                    <td>{{ $ingreso->accesoIngreso->acceso ?? 'S/D' }}</td>
                 </tr>
             @empty
                 <tr>

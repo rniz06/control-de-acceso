@@ -14,22 +14,31 @@
                     oninput="this.value = this.value.toUpperCase()" label="Vehiculo" igroup-size="sm" />
             </th>
 
-            {{-- Ingresante --}}
+            {{-- Registro Entrada --}}
             <th>
-                <x-adminlte-input name="" wire:model.live.debounce.200ms="buscarPersonaVisito"
-                    label="Ingresante" igroup-size="sm" disabled />
+                <x-adminlte-input name="" wire:model.live.debounce.200ms="buscarGuardia"
+                    label="Registro Entrada" igroup-size="sm" />
             </th>
 
-            {{-- Visita a --}}
+            {{-- Empresa --}}
             <th>
-                <x-adminlte-select name="" wire:model.live.debounce.200ms="buscarPersonaIngresa"
-                    label="Visita a" igroup-size="sm">
+                <x-adminlte-select name="" wire:model.live.debounce.200ms="buscarEmpresaId" label="Empresa"
+                    igroup-size="sm">
                     <option value="">-- Todos --</option>
-                    @forelse ($personasVisitables as $persona)
-                        <option value="{{ $persona->id }}">{{ $persona->nombre_completo  ?? 'S/D' }}</option>
-                    @empty
-                        SIN DATOS
-                    @endforelse
+                    @foreach ($empresas as $empresa)
+                        <option value="{{ $empresa->id }}">{{ $empresa->empresa ?? 'S/D' }}</option>
+                    @endforeach
+                </x-adminlte-select>
+            </th>
+
+            {{-- Sucursal --}}
+            <th>
+                <x-adminlte-select name="" wire:model.live.debounce.200ms="buscarSucursalId" label="Sucursal"
+                    igroup-size="sm">
+                    <option value="">-- Todos --</option>
+                    @foreach ($sucursales as $sucursal)
+                        <option value="{{ $sucursal->id }}">{{ $sucursal->sucursal ?? 'S/D' }}</option>
+                    @endforeach
                 </x-adminlte-select>
             </th>
 
@@ -46,23 +55,6 @@
                 </x-adminlte-select>
             </th>
 
-            {{-- Guardia --}}
-            <th>
-                <x-adminlte-input name="" wire:model.live.debounce.200ms="buscarGuardia"
-                    label="Guardia" igroup-size="sm" />
-            </th>
-
-            {{-- Empresa --}}
-            {{-- <th>
-                <x-adminlte-select name="" wire:model.live.debounce.200ms="buscarEmpresaId" label="Empresa"
-                    igroup-size="sm">
-                    <option value="">-- Todos --</option>
-                    @foreach ($empresas as $empresa)
-                        <option value="{{ $empresa->id }}">{{ $empresa->empresa ?? 'S/D' }}</option>
-                    @endforeach
-                </x-adminlte-select>
-            </th> --}}
-
             {{-- Acciones --}}
             <th>
                 <x-adminlte-input name="" label="Acciones" igroup-size="sm" disabled />
@@ -74,10 +66,10 @@
             <tr>
                 <td>{{ optional($ingreso->fecha_hora_ingreso)->format('d/m/Y H:i:s') ?? 'S/D' }}</td>
                 <td>{{ $ingreso->vehiculo->chapa ?? 'S/D' }}</td>
-                <td>{{ $ingreso->personaIngreso->nombre_completo ?? 'S/D' }}</td>
-                <td>{{ $ingreso->personaVisito->nombre_completo ?? 'S/D' }}</td>
-                <td>{{ $ingreso->accesoIngreso->acceso ?? 'S/D' }}</td>
                 <td>{{ $ingreso->usuarioRegistroIngreso->name ?? 'S/D' }}</td>
+                <td>{{ $ingreso->empresa->empresa ?? 'S/D' }}</td>
+                <td>{{ $ingreso->sucursal->sucursal ?? 'S/D' }}</td>
+                <td>{{ $ingreso->accesoIngreso->acceso ?? 'S/D' }}</td>
                 <td>
                     {{-- <x-tabla-dropdown>
                         @can('Usuarios Editar')

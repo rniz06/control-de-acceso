@@ -350,7 +350,7 @@ return [
                 [
                     'text'  => 'Reporte de Ingresos',
                     'route' => 'cda.reportes.ingreso',
-                    //'can' => 'Reportes Ingresos',
+                    'can' => 'Reportes Ingresos Listar',
                 ],
                 [
                     'text' => 'Parametros',

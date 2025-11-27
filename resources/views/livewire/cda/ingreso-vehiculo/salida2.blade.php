@@ -94,7 +94,7 @@
                 <x-adminlte-button label="Salir" theme="outline-secondary" icon="fas fa-arrow-left"
                     class="btn-sm" />
                 {{-- Guardar --}}
-                <x-adminlte-button type="submit" label="Registrar Entrada" theme="outline-success"
+                <x-adminlte-button type="submit" label="Registrar Salida" theme="outline-success"
                     icon="fas fa-save" class="btn-sm float-right" />
             </x-slot>
 

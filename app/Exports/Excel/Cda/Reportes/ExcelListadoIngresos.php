@@ -25,7 +25,7 @@ class ExcelListadoIngresos implements FromCollection, WithHeadings, WithMapping
 
     public function headings(): array
     {
-        return ['Fecha Ingreso', 'Vehiculo', 'Acceso', 'Guardia'];
+        return ['Fecha Ingreso', 'Vehiculo', 'Registro Entrada', 'Empresa', 'Sucursal', 'Acceso'];
     }
 
     public function map($ingreso): array
@@ -33,8 +33,10 @@ class ExcelListadoIngresos implements FromCollection, WithHeadings, WithMapping
         return [
             !empty($ingreso->fecha_hora_ingreso) ? date('d/m/Y H:i:s', strtotime($ingreso->fecha_hora_ingreso)) : 'S/D',
             $ingreso->vehiculo->chapa ?? 'S/D',
-            $ingreso->accesoIngreso->acceso ?? 'S/D',
             $ingreso->usuarioRegistroIngreso->name ?? 'S/D',
+            $ingreso->empresa->empresa ?? 'S/D',
+            $ingreso->sucursal->sucursal ?? 'S/D',
+            $ingreso->accesoIngreso->acceso ?? 'S/D'
         ];
     }
 }

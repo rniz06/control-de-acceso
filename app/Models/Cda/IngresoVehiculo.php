@@ -143,6 +143,28 @@ class IngresoVehiculo extends Model implements Auditable
     }
 
     /**
+     * Busqueda por campo empresa_id.
+     */
+    #[Scope]
+    protected function buscarEmpresaId(Builder $query, $search = null): void
+    {
+        $query->when($search, function (Builder $query, string $search) {
+            $query->where('empresa_id', $search);
+        });
+    }
+
+    /**
+     * Busqueda por campo sucursal_id.
+     */
+    #[Scope]
+    protected function buscarSucursalId(Builder $query, $search = null): void
+    {
+        $query->when($search, function (Builder $query, string $search) {
+            $query->where('sucursal_id', $search);
+        });
+    }
+
+    /**
      * Busqueda por relacion personaVisita campo acceso_ingreso_id.
      */
     #[Scope]

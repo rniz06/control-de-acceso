@@ -7,6 +7,8 @@ use App\Exports\Pdf\Cda\Reportes\PdfListadoIngresos;
 use App\Models\Acceso;
 use App\Models\Cda\IngresoVehiculo;
 use App\Models\Cda\Persona;
+use App\Models\Empresa;
+use App\Models\Sucursal;
 use Carbon\Carbon;
 use Livewire\Attributes\Url;
 use Livewire\Component;
@@ -18,19 +20,18 @@ class Ingreso extends Component
     use WithPagination;
 
     // #[Url]
-    public $buscarFechaHoraIngreso, $buscarVehiculoPorChapa = '', $buscarPersonaVisitoId = '', $buscarAccesoId = '';
+    public $buscarFechaHoraIngreso, $buscarVehiculoPorChapa = '', $buscarEmpresaId = '', $buscarSucursalId = '', $buscarAccesoId = '';
 
-    public $personasVisitables = [], $accesos = []; // PROPIEDADES PARA LOS SELECT
+    public $empresas = [], $sucursales = [], $accesos = []; // PROPIEDADES PARA LOS SELECT
 
     public $paginado = 5;
 
     public function mount()
     {
         $this->buscarFechaHoraIngreso = Carbon::now()->toDateString();
-        $this->personasVisitables = Persona::where('esPersonalEmpresa', true)
-            ->orderBy('nombre_completo')
-            ->get(['id', 'nombre_completo']);
-        $this->accesos = Acceso::get(['id', 'acceso']);
+        $this->empresas               = Empresa::get(['id', 'empresa']);
+        $this->sucursales             = Sucursal::get(['id', 'sucursal']);
+        $this->accesos                = Acceso::get(['id', 'acceso']);
     }
 
     public function render()
@@ -40,22 +41,29 @@ class Ingreso extends Component
                 'id',
                 'fecha_hora_ingreso',
                 'vehiculo_id',
-                'persona_ingresa_id',
-                'persona_visita_id',
                 'acceso_ingreso_id',
-                'usuario_registro_ingreso'
+                'usuario_registro_ingreso',
+                'empresa_id',
+                'sucursal_id'
             )->buscarFechaHoraIngreso($this->buscarFechaHoraIngreso)
                 ->buscarVehiculoPorChapa($this->buscarVehiculoPorChapa)
-                ->buscarPersonaVisitoId($this->buscarPersonaVisitoId)
+                ->buscarEmpresaId($this->buscarEmpresaId)
+                ->buscarSucursalId($this->buscarSucursalId)
                 ->buscarAccesoId($this->buscarAccesoId)
                 ->with([
                     'vehiculo:id,chapa',
-                    'personaIngreso:id,nombre_completo',
-                    'personaVisito:id,nombre_completo',
                     'accesoIngreso:id,acceso',
-                    'usuarioRegistroIngreso:id,name'
+                    'usuarioRegistroIngreso:id,name',
+                    'empresa:id,empresa',
+                    'sucursal:id,sucursal'
                 ])->orderBy('fecha_hora_ingreso', 'desc')->paginate($this->paginado)
         ]);
+    }
+
+    public function updatedBuscarEmpresaId($empresa_id)
+    {
+        $this->sucursales = Sucursal::where('empresa_id', $empresa_id)->get(['id', 'sucursal']);
+        $this->accesos    = Acceso::where('empresa_id', $empresa_id)->get(['id', 'acceso']);
     }
 
     public function cargarDatosParaExpotar()
@@ -64,22 +72,22 @@ class Ingreso extends Component
             'id',
             'fecha_hora_ingreso',
             'vehiculo_id',
-            'persona_ingresa_id',
-            'persona_visita_id',
             'acceso_ingreso_id',
-            'usuario_registro_ingreso'
+            'usuario_registro_ingreso',
+            'empresa_id',
+            'sucursal_id'
         )->buscarFechaHoraIngreso($this->buscarFechaHoraIngreso)
             ->buscarVehiculoPorChapa($this->buscarVehiculoPorChapa)
-            ->buscarPersonaVisitoId($this->buscarPersonaVisitoId)
+            ->buscarEmpresaId($this->buscarEmpresaId)
+            ->buscarSucursalId($this->buscarSucursalId)
             ->buscarAccesoId($this->buscarAccesoId)
             ->with([
                 'vehiculo:id,chapa',
-                'personaIngreso:id,nombre_completo',
-                'personaVisito:id,nombre_completo',
                 'accesoIngreso:id,acceso',
-                'usuarioRegistroIngreso:id,name'
-            ])
-            ->orderBy('fecha_hora_ingreso', 'desc')->get();
+                'usuarioRegistroIngreso:id,name',
+                'empresa:id,empresa',
+                'sucursal:id,sucursal'
+            ])->orderBy('fecha_hora_ingreso', 'desc')->get();
     }
 
     public function excel()
