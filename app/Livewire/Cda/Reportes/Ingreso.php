@@ -50,6 +50,7 @@ class Ingreso extends Component
                 ->buscarEmpresaId($this->buscarEmpresaId)
                 ->buscarSucursalId($this->buscarSucursalId)
                 ->buscarAccesoId($this->buscarAccesoId)
+                ->where('corresponde_salida', false)
                 ->with([
                     'vehiculo:id,chapa',
                     'accesoIngreso:id,acceso',
@@ -81,6 +82,7 @@ class Ingreso extends Component
             ->buscarEmpresaId($this->buscarEmpresaId)
             ->buscarSucursalId($this->buscarSucursalId)
             ->buscarAccesoId($this->buscarAccesoId)
+            ->where('corresponde_salida', false)
             ->with([
                 'vehiculo:id,chapa',
                 'accesoIngreso:id,acceso',
