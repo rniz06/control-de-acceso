@@ -9,7 +9,8 @@
 {{-- Content body: main page content --}}
 
 @section('content_body')
-    @livewire('cda.ingreso-vehiculo.salida')
+    {{-- @livewire('cda.ingreso-vehiculo.salida') --}}
+    @livewire('cda.ingreso-vehiculo.salida2')
 @stop
 
 @push('css')
