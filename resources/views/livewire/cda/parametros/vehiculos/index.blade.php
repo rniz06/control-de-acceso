@@ -95,11 +95,10 @@
                                 wire:confirm="Estas Seguro que desear ELIMINAR este vehiculo?" />
                         @endcan
                     </x-tabla-dropdown>
-
-                    {{-- Componente con Modal Fuera del Dropdonw para evitar superposicion --}}
-                    @livewire('cda.parametros.vehiculos.modal-edit', ['vehiculo_id' => $vehiculo->id], key($vehiculo->id))
                 </td>
             </tr>
+            {{-- Componente con Modal Fuera del Dropdonw para evitar superposicion --}}
+            @livewire('cda.parametros.vehiculos.modal-edit', ['vehiculo_id' => $vehiculo->id], key("vehiculo-edit-{$vehiculo->id}"))
         @empty
             <tr>
                 <td colspan="100%" class="text-center text-muted">Sin resultados coincidentes...</td>
