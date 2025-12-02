@@ -13,6 +13,14 @@
                 </x-slot>
             </x-adminlte-input>
 
+            {{-- Nro. Móvil --}}
+            <x-adminlte-input name="nro_movil" wire:model.blur="nro_movil" oninput="this.value = this.value.toUpperCase()"
+                placeholder="EJ: 17" label-class="text-lightblue" fgroup-class="col-md-6" igroup-size="sm">
+                <x-slot name="prependSlot">
+                    <div class="input-group-text">Nro. Móvil</div>
+                </x-slot>
+            </x-adminlte-input>
+
             {{-- Marca --}}
             <x-adminlte-select name="marca_id" wire:model.blur="marca_id" label-class="text-lightblue"
                 fgroup-class="col-md-6" igroup-size="sm">
@@ -48,6 +56,18 @@
                     <div class="input-group-text">Color *</div>
                 </x-slot>
             </x-adminlte-select>
+
+            {{-- Empresa --}}
+            <x-adminlte-select name="empresa_id" wire:model.blur="empresa_id" label-class="text-lightblue"
+                fgroup-class="col-md-6" igroup-size="sm">
+                <option value="">-- Seleccionar --</option>
+                @foreach ($empresas as $empresa)
+                    <option value="{{ $empresa->id }}">{{ $empresa->empresa ?? 'S/D' }}</option>
+                @endforeach
+                <x-slot name="prependSlot">
+                    <div class="input-group-text">Empresa *</div>
+                </x-slot>
+            </x-adminlte-select>
         </div>
 
 
@@ -57,7 +77,7 @@
                 wire:click="grabar" />
 
             <x-adminlte-button theme="outline-secondary" class="btn-sm" icon="fas fa-arrow-left" label="Cerrar"
-                data-dismiss="modal" />
+                data-dismiss="modal" wire:click="cerrar_modal" />
         </x-slot>
 
     </x-adminlte-modal>

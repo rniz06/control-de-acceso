@@ -17,6 +17,12 @@
                     oninput="this.value = this.value.toUpperCase()" label="Chapa" igroup-size="sm" />
             </th>
 
+            {{-- Nro. Movil --}}
+            <th>
+                <x-adminlte-input name="" wire:model.live.debounce.200ms="buscarNroMovil"
+                    oninput="this.value = this.value.toUpperCase()" label="Nro. Movil" igroup-size="sm" />
+            </th>
+
             {{-- Marca --}}
             <th>
                 <x-adminlte-select name="" wire:model.live.debounce.200ms="buscarMarcaId" label="Marca"
@@ -50,6 +56,17 @@
                 </x-adminlte-select>
             </th>
 
+            {{-- Empresa --}}
+            <th>
+                <x-adminlte-select name="" wire:model.live.debounce.200ms="buscarEmpresaId" label="Empresa"
+                    igroup-size="sm">
+                    <option value="">-- Todos --</option>
+                    @foreach ($empresas as $empresa)
+                        <option value="{{ $empresa->id }}">{{ $empresa->empresa ?? 'S/D' }}</option>
+                    @endforeach
+                </x-adminlte-select>
+            </th>
+
             {{-- Acciones --}}
             <th>
                 <x-adminlte-input name="" label="Acciones" igroup-size="sm" disabled />
@@ -60,9 +77,11 @@
         @forelse ($vehiculos as $vehiculo)
             <tr>
                 <td>{{ $vehiculo->chapa ?? 'S/D' }}</td>
+                <td>{{ $vehiculo->nro_movil ?? 'S/D' }}</td>
                 <td>{{ $vehiculo->marca->marca ?? 'S/D' }}</td>
                 <td>{{ $vehiculo->modelo->modelo ?? 'S/D' }}</td>
                 <td>{{ $vehiculo->color->color ?? 'S/D' }}</td>
+                <td>{{ $vehiculo->empresa->empresa ?? 'S/D' }}</td>
                 <td>
                     <x-tabla-dropdown>
                         @can('Vehiculos Editar')

@@ -19,7 +19,7 @@ class Ingreso2 extends Component
 
     // Datos del vehículo
     #[Validate]
-    public $chapa, $marca_id, $modelo_id, $color_id, $acceso_ingreso_id;
+    public $chapa, $nro_movil, $marca_id, $modelo_id, $color_id, $acceso_ingreso_id;
 
     // Opciones para selects
     public $marcas = [], $modelos = [], $colores = [], $accesos = [], $empresas = [], $sucursales = [];
@@ -41,6 +41,13 @@ class Ingreso2 extends Component
     {
         return [
             'chapa'               => ['required', 'string', 'min:1', 'max:10'],
+            'nro_movil'   => [
+                'nullable',
+                'string',
+                'min_digits:1',
+                'max_digits:5',
+                //Rule::unique(Vehiculo::class, 'nro_movil')->where('empresa_id', $this->empresa_id)
+            ],
             'marca_id'            => ['required', Rule::exists(Marca::class, 'id')],
             'modelo_id'           => ['required', Rule::exists(Modelo::class, 'id')],
             'color_id'            => ['required', Rule::exists(Color::class, 'id')],
@@ -63,9 +70,11 @@ class Ingreso2 extends Component
         DB::transaction(function () {
             $this->vehiculo_id = $this->vehiculo_id ?: Vehiculo::create([
                 'chapa'      => $this->chapa,
+                'nro_movil'  => $this->nro_movil,
                 'marca_id'   => $this->marca_id,
                 'modelo_id'  => $this->modelo_id,
                 'color_id'   => $this->color_id,
+                'empresa_id' => $this->empresa_id,
                 'creado_por' => Auth::id(),
             ])->id;
 
@@ -80,7 +89,6 @@ class Ingreso2 extends Component
                 'corresponde_salida'       => false,
                 'creado_por'               => Auth::id(),
             ]);
-
         });
 
         session()->flash('success', 'Ingreso registrado correctamente.');
@@ -96,18 +104,20 @@ class Ingreso2 extends Component
      *  Eventos de actualización
      * ────────────────────────────────────────────── */
 
+    # AL ACTUALIZAR EMPRESA_ID
     public function updatedEmpresaId($value)
     {
         $this->sucursales = Sucursal::where('empresa_id', $value)->orderBy('sucursal')->get(['id', 'sucursal']);
         $this->accesos = Acceso::where('empresa_id', $this->empresa_id)->orderBy('acceso')->get(['id', 'acceso']);
     }
 
+    # AL ACTUALIZAR CHAPA
     public function updatedChapa($value)
     {
         $this->resetVehiculoForm();
 
         $vehiculo = Vehiculo::with(['marca:id,marca', 'modelo:id,modelo', 'color:id,color'])
-            ->select('id', 'marca_id', 'modelo_id', 'color_id')
+            ->select('id', 'chapa', 'nro_movil', 'marca_id', 'modelo_id', 'color_id')
             ->where('chapa', $value)
             ->first();
 
@@ -118,6 +128,24 @@ class Ingreso2 extends Component
         }
     }
 
+    # AL ACTUALIZAR NRO_MOVIL
+    public function updatedNroMovil($value)
+    {
+        $this->resetVehiculoForm();
+
+        $vehiculo = Vehiculo::with(['marca:id,marca', 'modelo:id,modelo', 'color:id,color'])
+            ->select('id', 'chapa', 'nro_movil', 'marca_id', 'modelo_id', 'color_id')
+            ->where([['empresa_id', $this->empresa_id], ['nro_movil', $value]])
+            ->first();
+
+        if ($vehiculo) {
+            $this->fillVehiculo($vehiculo);
+        } else {
+            $this->bloqueoFormVehiculo = false;
+        }
+    }
+
+    # AL ACTUALIZAR MARCA_ID
     public function updatedMarcaId($value)
     {
         $this->modelo_id = '';
@@ -139,6 +167,8 @@ class Ingreso2 extends Component
     private function fillVehiculo($vehiculo)
     {
         $this->vehiculo_id = $vehiculo->id;
+        $this->chapa       = $vehiculo->chapa;
+        $this->nro_movil   = $vehiculo->nro_movil;
         $this->marca_id    = $vehiculo->marca_id;
         $this->modelo_id   = $vehiculo->modelo_id;
         $this->color_id    = $vehiculo->color_id;

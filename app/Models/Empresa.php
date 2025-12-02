@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Cda\IngresoVehiculo;
 use App\Models\Cda\Persona;
+use App\Models\Cda\Vehiculo;
 use App\Models\Compras\Compra;
 use App\Models\Compras\Pedido;
 use App\Models\Productos\Stock;
@@ -26,6 +27,13 @@ class Empresa extends Model implements Auditable
     | RELACIONES DEL MODELO
     |---------------------------------------
     */
+
+    /*---------------------------RELACIONES HASMANY------------------------*/
+
+    public function vehiculos()
+    {
+        return $this->hasMany(Vehiculo::class, 'empresa_id');
+    }
 
     public function personas()
     {

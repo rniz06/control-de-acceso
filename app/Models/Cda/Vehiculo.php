@@ -2,6 +2,7 @@
 
 namespace App\Models\Cda;
 
+use App\Models\Empresa;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
@@ -15,7 +16,7 @@ class Vehiculo extends Model implements Auditable
 
     protected $table = 'control_acceso.CDA_VEHICULOS';
 
-    protected $fillable = ['chapa', 'marca_id', 'modelo_id', 'color_id', 'creado_por', 'actualizado_por'];
+    protected $fillable = ['chapa', 'nro_movil', 'marca_id', 'modelo_id', 'color_id', 'creado_por', 'actualizado_por', 'empresa_id'];
 
     /*
     |---------------------------------------
@@ -37,6 +38,13 @@ class Vehiculo extends Model implements Auditable
     {
         return $this->belongsTo(Color::class, 'color_id');
     }
+
+    public function empresa()
+    {
+        return $this->belongsTo(Empresa::class, 'empresa_id');
+    }
+
+    /*---------------------------RELACIONES HASMANY------------------------*/
 
     public function ingresos()
     {
@@ -63,6 +71,17 @@ class Vehiculo extends Model implements Auditable
     {
         $query->when($search, function (Builder $query, string $search) {
             $query->whereLike('chapa', "%{$search}%");
+        });
+    }
+
+    /**
+     * Busqueda por campo nro_movil.
+     */
+    #[Scope]
+    protected function buscarNroMovil(Builder $query, $search = null): void
+    {
+        $query->when($search, function (Builder $query, string $search) {
+            $query->where('nro_movil', $search);
         });
     }
 
@@ -96,6 +115,17 @@ class Vehiculo extends Model implements Auditable
     {
         $query->when($search, function (Builder $query, string $search) {
             $query->where('color_id', $search);
+        });
+    }
+
+    /**
+     * Busqueda por  campo empresa_id.
+     */
+    #[Scope]
+    protected function buscarEmpresaId(Builder $query, $search = null): void
+    {
+        $query->when($search, function (Builder $query, string $search) {
+            $query->where('empresa_id', $search);
         });
     }
 

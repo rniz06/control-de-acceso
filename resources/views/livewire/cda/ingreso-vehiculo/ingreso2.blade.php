@@ -29,7 +29,7 @@
             </div>
 
             <hr>
-            
+
             <div class="col-md-12 row">
                 {{-- Vehiculo --}}
                 <x-adminlte-input name="chapa" wire:model.blur="chapa" label-class="text-lightblue"
@@ -37,6 +37,15 @@
                     placeholder="EJ: ABCD123">
                     <x-slot name="prependSlot">
                         <div class="input-group-text">Chapa del Vehiculo *</div>
+                    </x-slot>
+                </x-adminlte-input>
+
+                {{-- Nro. Móvil --}}
+                <x-adminlte-input name="nro_movil" wire:model.blur="nro_movil"
+                    oninput="this.value = this.value.toUpperCase()" placeholder="EJ: 17" label-class="text-lightblue"
+                    fgroup-class="col-md-3" igroup-size="sm">
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text">Nro. Móvil</div>
                     </x-slot>
                 </x-adminlte-input>
 
@@ -91,11 +100,10 @@
 
             <x-slot name="footerSlot">
                 {{-- Botón para agregar más productos --}}
-                <x-adminlte-button label="Salir" theme="outline-secondary" icon="fas fa-arrow-left"
-                    class="btn-sm" />
+                <x-adminlte-button label="Salir" theme="outline-secondary" icon="fas fa-arrow-left" class="btn-sm" />
                 {{-- Guardar --}}
-                <x-adminlte-button type="submit" label="Registrar Entrada" theme="outline-success"
-                    icon="fas fa-save" class="btn-sm float-right" />
+                <x-adminlte-button type="submit" label="Registrar Entrada" theme="outline-success" icon="fas fa-save"
+                    class="btn-sm float-right" />
             </x-slot>
 
         </x-adminlte-card>

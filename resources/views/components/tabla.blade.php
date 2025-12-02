@@ -38,7 +38,7 @@
     </div>
 
     <div class="card-body table-responsive p-0">
-        <table class="table table-bordered table-hover mb-0">
+        <table class="table table-sm table-bordered table-hover mb-0">
             <thead>
                 <tr>
                     {{ $cabeceras }}

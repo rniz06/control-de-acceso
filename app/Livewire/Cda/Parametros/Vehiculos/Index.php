@@ -6,6 +6,7 @@ use App\Models\Cda\Color;
 use App\Models\Cda\Marca;
 use App\Models\Cda\Modelo;
 use App\Models\Cda\Vehiculo;
+use App\Models\Empresa;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -20,18 +21,19 @@ class Index extends Component
     use WithPagination;
 
     # PROPIEDADES DE BUSQUEDA Y PAGINACION
-    public $buscarChapa = '', $buscarMarcaId = '', $buscarModeloId = '', $buscarColorId = '';
+    public $buscarChapa = '', $buscarNroMovil = '', $buscarMarcaId = '', $buscarModeloId = '', $buscarColorId = '', $buscarEmpresaId = '';
     public $paginado = 5;
 
     # PROPIEDADES PARA LOS SELECT
-    public $marcas = [], $modelos = [], $colores = [];
+    public $marcas = [], $modelos = [], $colores = [], $empresas = [];
 
     # FUNCION MOUNT DE LIVEWIRE
     public function mount()
     {
-        $this->marcas  = Marca::get(['id', 'marca']);
-        $this->modelos = Modelo::get(['id', 'modelo']);
-        $this->colores = Color::get(['id', 'color']);
+        $this->marcas   = Marca::get(['id', 'marca']);
+        $this->modelos  = Modelo::get(['id', 'modelo']);
+        $this->colores  = Color::get(['id', 'color']);
+        $this->empresas = Empresa::get(['id', 'empresa']);
     }
 
     # LIMPIAR EL BUSCADOR Y LA PAGINACION AL CAMBIAR DE PAGINA
@@ -39,9 +41,11 @@ class Index extends Component
     {
         if (in_array($key, [
             'buscarChapa',
+            'buscarNroMovil',
             'buscarMarcaId',
             'buscarModeloId',
             'buscarColorId',
+            'buscarEmpresaId',
             'paginado',
         ])) {
             $this->resetPage();
@@ -51,12 +55,14 @@ class Index extends Component
     public function render()
     {
         return view('livewire.cda.parametros.vehiculos.index', [
-            'vehiculos' => Vehiculo::select('id', 'chapa', 'marca_id', 'modelo_id', 'color_id')
+            'vehiculos' => Vehiculo::select('id', 'chapa', 'nro_movil', 'marca_id', 'modelo_id', 'color_id', 'empresa_id')
                 ->buscarChapa($this->buscarChapa)
+                ->buscarNroMovil($this->buscarNroMovil)
                 ->buscarMarcaId($this->buscarMarcaId)
                 ->buscarModeloId($this->buscarModeloId)
                 ->buscarColorId($this->buscarColorId)
-                ->with(['marca:id,marca', 'modelo:id,modelo', 'color:id,color'])
+                ->buscarEmpresaId($this->buscarEmpresaId)
+                ->with(['marca:id,marca', 'modelo:id,modelo', 'color:id,color', 'empresa:id,empresa'])
                 ->paginate($this->paginado)
         ]);
     }
