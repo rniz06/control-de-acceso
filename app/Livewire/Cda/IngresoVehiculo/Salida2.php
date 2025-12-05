@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Cda\IngresoVehiculo;
 
+use App\Jobs\Cda\IngresoVehiculo\SalidaCentroLogisticoJob;
 use App\Models\{Empresa, Sucursal, Acceso};
 use App\Models\Cda\{Color, IngresoVehiculo, Marca, Modelo, Vehiculo};
 use Illuminate\Support\Facades\Auth;
@@ -88,6 +89,11 @@ class Salida2 extends Component
                 'corresponde_salida'      => true,
                 'creado_por'              => Auth::id(),
             ]);
+
+            $vehiculo = Vehiculo::findOrFail($this->vehiculo_id);
+            
+            # NOTIFICAR POR CORREO
+            SalidaCentroLogisticoJob::dispatch($vehiculo);
         });
 
         session()->flash('success', 'Salida registrada correctamente.');

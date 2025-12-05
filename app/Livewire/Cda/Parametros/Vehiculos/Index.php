@@ -78,7 +78,7 @@ class Index extends Component
             session()->flash('error', 'No se pudo eliminar el Vehiculo. ' . $e->getMessage());
         }
 
-        return $this->redirectRoute('cda.parametros.marcas.index');
+        return $this->redirectRoute('cda.parametros.vehiculos.index');
     }
 
     # Actualizar Modelos Del select de filtros al cambiar de Marca

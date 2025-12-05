@@ -2,12 +2,16 @@
 
 namespace App\Livewire\Cda\IngresoVehiculo;
 
+use App\Jobs\Cda\IngresoVehiculo\IngresoCentroLogisticoJob;
+use App\Jobs\EnviarEmailIngresoVehiculo;
+use App\Mail\NotificarIngresoVehiculo;
 use App\Models\Acceso;
 use App\Models\Cda\{Color, IngresoVehiculo, Marca, Modelo, Persona, Vehiculo};
 use App\Models\Empresa;
 use App\Models\Sucursal;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -89,6 +93,11 @@ class Ingreso2 extends Component
                 'corresponde_salida'       => false,
                 'creado_por'               => Auth::id(),
             ]);
+
+            $vehiculo = Vehiculo::findOrFail($this->vehiculo_id);
+            
+            # NOTIFICAR POR CORREO
+            IngresoCentroLogisticoJob::dispatch($vehiculo);
         });
 
         session()->flash('success', 'Ingreso registrado correctamente.');
