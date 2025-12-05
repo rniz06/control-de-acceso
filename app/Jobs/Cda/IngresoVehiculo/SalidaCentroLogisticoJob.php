@@ -28,6 +28,7 @@ class SalidaCentroLogisticoJob implements ShouldQueue
         Mail::to('dpto.informatica@rubilock.com.py')
             ->cc('ronaldalexisniznunez@gmail.com')
             //->cc('monitoreo_cctv@rubilock.com.py')
-            ->queue(new SalidaCentroLogisticoMail($this->vehiculo));
+            // ->queue(new SalidaCentroLogisticoMail($this->vehiculo));
+            ->send(new SalidaCentroLogisticoMail($this->vehiculo));
     }
 }
