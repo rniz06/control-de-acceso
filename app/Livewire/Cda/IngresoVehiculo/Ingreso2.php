@@ -94,10 +94,10 @@ class Ingreso2 extends Component
                 'creado_por'               => Auth::id(),
             ]);
 
-            $vehiculo = Vehiculo::findOrFail($this->vehiculo_id);
+            //$vehiculo = Vehiculo::findOrFail($this->vehiculo_id);
             
             # NOTIFICAR POR CORREO
-            IngresoCentroLogisticoJob::dispatch($vehiculo);
+            //IngresoCentroLogisticoJob::dispatch($vehiculo);
         });
 
         session()->flash('success', 'Ingreso registrado correctamente.');
