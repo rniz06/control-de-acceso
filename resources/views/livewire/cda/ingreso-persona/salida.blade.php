@@ -15,8 +15,8 @@
                 </x-adminlte-input>
 
                 {{-- Nombre Completo --}}
-                <x-adminlte-input name="" label-class="text-lightblue" fgroup-class="col-md-3" igroup-size="sm" value="{{ $registro->personaIngreso->nombre_completo ?? 'S/D' }}"
-                    readonly>
+                <x-adminlte-input name="" label-class="text-lightblue" fgroup-class="col-md-3" igroup-size="sm"
+                    value="{{ $registro->personaIngreso->nombre_completo ?? 'S/D' }}" readonly>
                     <x-slot name="prependSlot">
                         <div class="input-group-text">Nombre Completo *</div>
                     </x-slot>
@@ -36,8 +36,10 @@
             </div>
 
             <x-slot name="footerSlot">
-                {{-- Botón para agregar más productos --}}
-                <x-adminlte-button label="Salir" theme="outline-secondary" icon="fas fa-arrow-left" class="btn-sm" />
+                {{-- Botón de retroceso --}}
+                <a href="{{ route('cda.panel-central.index') }}"
+                    class="btn btn-outline-secondary text-decoration-none btn-sm"><i
+                        class="fas fa-arrow-left mr-1"></i>Volver</a>
                 {{-- Guardar --}}
                 <x-adminlte-button type="submit" label="Registrar Entrada" theme="outline-success" icon="fas fa-save"
                     class="btn-sm float-right" />

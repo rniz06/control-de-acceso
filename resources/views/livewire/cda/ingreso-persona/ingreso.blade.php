@@ -48,8 +48,10 @@
             </div>
 
             <x-slot name="footerSlot">
-                {{-- Botón para agregar más productos --}}
-                <x-adminlte-button label="Salir" theme="outline-secondary" icon="fas fa-arrow-left" class="btn-sm" />
+                {{-- Botón de retroceso --}}
+                <a href="{{ route('cda.panel-central.index') }}"
+                    class="btn btn-outline-secondary text-decoration-none btn-sm"><i
+                        class="fas fa-arrow-left mr-1"></i>Volver</a>
                 {{-- Guardar --}}
                 <x-adminlte-button type="submit" label="Registrar Entrada" theme="outline-success" icon="fas fa-save"
                     class="btn-sm float-right" />
