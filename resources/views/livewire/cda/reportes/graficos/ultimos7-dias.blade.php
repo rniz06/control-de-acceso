@@ -7,27 +7,6 @@
     </div>
 </x-adminlte-card>
 
-
-{{-- <div class="card card-success">
-    <div class="card-header">
-        <h3 class="card-title">Últimos 7 Días</h3>
-
-        <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                <i class="fas fa-minus"></i>
-            </button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-    </div>
-    <div class="card-body">
-        <div class="chart">
-            <canvas id="grafico-ultimos-7-dias"></canvas>
-        </div>
-    </div>
-</div> --}}
-
 @push('scripts')
     <script>
         document.addEventListener('livewire:init', () => {
