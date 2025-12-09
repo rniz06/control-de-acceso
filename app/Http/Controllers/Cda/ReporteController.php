@@ -15,6 +15,7 @@ class ReporteController extends Controller
     {
         $this->middleware('permission:Reportes Ingresos Listar', ['only' => ['ingreso']]);
         $this->middleware('permission:Reportes Salidas Listar', ['only' => ['salidas']]);
+        $this->middleware('permission:Reportes Graficos', ['only' => ['salidas']]);
     }
 
     public function ingreso()
@@ -25,5 +26,10 @@ class ReporteController extends Controller
     public function salidas()
     {
         return view('cda.reportes.salidas');    
+    }
+
+    public function graficos()
+    {
+        return view('cda.reportes.graficos');    
     }
 }

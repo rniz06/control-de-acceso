@@ -358,6 +358,11 @@ return [
                     'can' => 'Reportes Salidas Listar',
                 ],
                 [
+                    'text'  => 'Reportes Gráficos',
+                    'route' => 'cda.reportes.graficos',
+                    'can' => 'Reportes Graficos',
+                ],
+                [
                     'text' => 'Parametros',
                     #'icon' => 'fas fa-truck',
                     'submenu' => [
@@ -601,12 +606,18 @@ return [
             ],
         ],
         'Chartjs' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/chart.js/Chart.min.css',
+                ],
+                [
                     'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js',
+                    'asset' => true,
+                    'location' => 'vendor/chart.js/Chart.min.js',
+                    // 'location' => '//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js',
                 ],
             ],
         ],
