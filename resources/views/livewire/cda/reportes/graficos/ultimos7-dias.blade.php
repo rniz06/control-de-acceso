@@ -1,5 +1,14 @@
 <!-- BAR CHART -->
-<div class="card card-success">
+
+<x-adminlte-card title="Últimos 7 Días" theme="success" theme-mode="outline" icon="fas fa-chart-bar"
+    header-class="text-uppercase rounded-bottom border-success" collapsible>
+    <div class="chart">
+        <canvas id="grafico-ultimos-7-dias"></canvas>
+    </div>
+</x-adminlte-card>
+
+
+{{-- <div class="card card-success">
     <div class="card-header">
         <h3 class="card-title">Últimos 7 Días</h3>
 
@@ -17,9 +26,7 @@
             <canvas id="grafico-ultimos-7-dias"></canvas>
         </div>
     </div>
-    <!-- /.card-body -->
-</div>
-<!-- /.card -->
+</div> --}}
 
 @push('scripts')
     <script>
