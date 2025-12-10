@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\EmpresaController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\TrabajosEnColaController;
 use App\Http\Controllers\Admin\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,5 +30,10 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::get('/empresas', 'index')->name('empresas.index');
         Route::get('/empresas/create', 'create')->name('empresas.create');
         Route::get('/empresas/{empresa}/edit', 'edit')->name('empresas.edit');
+    });
+
+    // RUTAS DEL MODULO TRABAJOS EN COLAS
+    Route::controller(TrabajosEnColaController::class)->group(function () {
+        Route::get('/', 'index')->name('trabajos-en-colas.index');
     });
 });

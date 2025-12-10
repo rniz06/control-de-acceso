@@ -336,6 +336,11 @@ return [
                     'route' => 'admin.empresas.index',
                     'can' => 'Empresas Listar',
                 ],
+                [
+                    'text' => 'Trabajos en Colas',
+                    'route' => 'admin.trabajos-en-colas.index',
+                    'can' => 'Trabajos en Colas Listar',
+                ],
             ],
         ],
         [
